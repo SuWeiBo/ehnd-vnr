@@ -198,10 +198,10 @@ DWORD WINAPI LogThreadMain(LPVOID lpParam)
 	SendMessage(hLogRes, EM_REPLACESEL, TRUE, (LPARAM)L"");
 
 	ShowWindow(hLogRes, true);
-	
+
 	MSG msg;
 	BOOL bRet;
-	
+
 	// 쓰레드 초기화 완료
 	SetEvent(hLogEvent);
 

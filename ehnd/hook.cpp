@@ -141,7 +141,7 @@ int search_ptn(LPWORD ptn, size_t ptn_size, LPBYTE *addr)
 				break;
 			if (scan == 0)
 			{
-				*addr = p;	
+				*addr = p;
 				searchSuccessCount++;
 			}
 			scan--;
@@ -305,7 +305,7 @@ bool hook_getwordinfo(void)
 		memcpy(addr, Patch, PatchSize);
 		hHandle = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, GetCurrentProcessId());
 		VirtualProtectEx(hHandle, (void *)addr, PatchSize, OldProtect, &OldProtect2);
-		
+
 		// 0x07
 		PatchSize = 5;
 		addr += 7;
@@ -629,7 +629,7 @@ void userdict_log(char *s)
 	len = _MultiByteToWideChar(932, MB_PRECOMPOSED, s, -1, NULL, NULL);
 	wchar_t *str = (wchar_t *)msvcrt_malloc((len + 1) * 2);
 	_MultiByteToWideChar(932, 0, s, -1, str, len);
-	
+
 	WriteLog(USERDIC_LOG, L"UserDic_Req : %s\n", str);
 	msvcrt_free(str);
 }

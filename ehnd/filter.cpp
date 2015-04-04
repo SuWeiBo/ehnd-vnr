@@ -56,7 +56,7 @@ bool filter::pre_load()
 	vector<FILTERSTRUCT> Filter;
 
 	HANDLE hFind = FindFirstFile(Path.c_str(), &FindFileData);
-	
+
 	do
 	{
 		if (hFind == INVALID_HANDLE_VALUE) break;
@@ -195,7 +195,7 @@ bool filter::userdic_load()
 
 	// load userdict.jk
 	if (pConfig->GetJKDICSwitch()) jkdic_load(userdic_line);
-	
+
 	// load anedic.txt
 	anedic_load(userdic_line);
 
@@ -348,7 +348,7 @@ bool filter::ehnddic_cleanup()
 		int i = wcslen(FindFileData.cFileName) - 1;
 		while (i--)
 		{
-			if (FindFileData.cFileName[i] == L'.' && 
+			if (FindFileData.cFileName[i] == L'.' &&
 				!wcscmp(FindFileData.cFileName + i, L".ehnd"))
 			{
 				wstring DelFile = lpTmpPath;
@@ -446,7 +446,7 @@ bool filter::skiplayer_load2(vector<SKIPLAYERSTRUCT> &SkipLayer, LPCWSTR lpPath,
 		return false;
 	}
 	//WriteLog(NORMAL_LOG, L"SkipLayerRead : 스킵레이어 %s 로드.\n", lpFileName);
-	
+
 	for (int line = 0; fgetws(Buffer, 1000, fp) != NULL; line++, g_line++)
 	{
 		int tab = 0;
@@ -543,7 +543,7 @@ bool filter::filter_load(vector<FILTERSTRUCT> &Filter, LPCWSTR lpPath, LPCWSTR l
 		fs.db = lpFileName;
 		fs.src = L"";
 		fs.dest = L"";
-		
+
 		int tab = 0;
 		for (UINT i = 0, prev = 0; i <= wcslen(Buffer); i++)
 		{
@@ -638,7 +638,7 @@ bool filter::userdic_load2(LPCWSTR lpPath, LPCWSTR lpFileName, int &g_line)
 		memset(us._db, 0, sizeof(us._db));
 
 		us._type = USERDIC_NOUN;
-		
+
 		int t = 0, n = 0;
 		wchar_t *pStr = Buffer;
 		while (*pStr != 0)
@@ -841,7 +841,7 @@ bool filter::filter_proc(vector<FILTERSTRUCT> &Filter, const int FilterType, wst
 				if (FilterType == PREFILTER) WriteLog(DETAIL_LOG, L"PreFilter : [%s:%d] | %s | %s | %d | %d\n", Filter[i].db.c_str(), Filter[i].line, Filter[i].src.c_str(), Filter[i].dest.c_str(), Filter[i].layer, Filter[i].regex);
 				else if (FilterType == POSTFILTER) WriteLog(DETAIL_LOG, L"PostFIlter : [%s:%d] | %s | %s | %d | %d\n", Filter[i].db.c_str(), Filter[i].line, Filter[i].src.c_str(), Filter[i].dest.c_str(), Filter[i].layer, Filter[i].regex);
 			}
-				
+
 		}
 		else
 		{
