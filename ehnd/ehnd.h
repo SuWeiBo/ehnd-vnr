@@ -39,6 +39,7 @@ extern "C"
 extern FARPROC apfnEzt[100];
 extern FARPROC apfnMsv[100];
 bool EhndInit();
-bool GetLoadPath(LPWSTR Path, int Size);
+bool GetDllBaseName(LPWSTR buffer, int size); // jichi 4/4/2015: Get dll file name without suffix
+bool GetLoadPath(LPWSTR Path, int Size); // jichi 4/4/2015: Get dll's directory
 bool GetExecutePath(LPWSTR Path, int Size);
 wstring replace_all(const wstring &str, const wstring &pattern, const wstring &replace);

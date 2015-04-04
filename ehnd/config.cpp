@@ -4,8 +4,9 @@
 bool config::LoadConfig()
 {
   wchar_t INIPath[MAX_PATH], buf[255];
-  GetLoadPath(INIPath, MAX_PATH);
-  wcscat_s(INIPath, L"\\Ehnd\\ehnd_conf.ini");
+  // jichi 4/5/2015: do not hardcode ehnd.ini file name
+  GetDllBaseName(INIPath, MAX_PATH);
+  wcscat_s(INIPath, L".ini");
 
   ReadINI(L"PREFILTER_SWITCH", L"CONFIG", buf, (wchar_t*)INIPath);
   if (buf[0] != NULL) (_wcsicmp(buf, L"OFF") != 0) ? SetPreSwitch(true) : SetPreSwitch(false);

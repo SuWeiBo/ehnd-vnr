@@ -40,9 +40,10 @@ bool hook()
 
   GetLoadPath(lpEztPath, MAX_PATH);
 
-  wcscpy_s(lpDllPath, lpEztPath);
-  wcscat_s(lpDllPath, L"\\j2kengine.dlx");
-  hDll = LoadLibrary(lpDllPath);
+  // jichi 4/4/2015: Dynamically get j2kengine.dlx location
+  //wcscpy_s(lpDllPath, lpEztPath);
+  //wcscat_s(lpDllPath, L"\\j2kengine.dlx");
+  hDll = LoadLibrary(L"j2kengine.dlx");
   if (!hDll)
   {
     MessageBox(0, L"J2KEngine.dlx Load Failed", L"EzTransHook", MB_ICONERROR);

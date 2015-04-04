@@ -277,6 +277,22 @@ __declspec(naked) void J2K_GetJ2KMainDir(void)
   __asm JMP apfnEzt[4 * 19];
 }
 
+// jichi 4/4/2015: Get dll file name without suffix
+bool GetDllBaseName(LPWSTR path, int size)
+{
+  path[0] = 0;
+  GetModuleFileName(g_hInst, path, size);
+  if (!path[0])
+    return false;
+  int i = wcslen(path);
+  while (i--)
+    if (path[i] == L'.') {
+      path[i] = 0;
+      break;
+    }
+  return true;
+}
+
 bool GetLoadPath(LPWSTR Path, int Size)
 {
   GetModuleFileName(g_hInst, Path, Size);
