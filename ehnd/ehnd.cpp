@@ -277,10 +277,24 @@ __declspec(naked) void J2K_GetJ2KMainDir(void)
   __asm JMP apfnEzt[4 * 19];
 }
 
-// jichi 4/4/2015: Get dll file name without suffix
-bool GetDllBaseName(LPWSTR path, int size)
+// jichi: get enclosing directory path for the dll without trailing '\\'
+bool GetModuleDirectory(HMODULE h, LPWSTR buf, int size)
 {
-  path[0] = 0;
+  GetModuleFileName(h, buf, size);
+  if (!buf[0])
+    return false;
+  int i = wcslen(buf);
+  while (i--)
+    if (buf[i] == L'\\') {
+      buf[i] = 0;
+      break;
+    }
+  return true;
+}
+
+// jichi 4/4/2015: Get dll file name without suffix
+bool GetModuleBaseName(LPWSTR path, int size)
+{
   GetModuleFileName(g_hInst, path, size);
   if (!path[0])
     return false;
@@ -293,36 +307,15 @@ bool GetDllBaseName(LPWSTR path, int size)
   return true;
 }
 
-bool GetLoadPath(LPWSTR Path, int Size)
+// jichi 4/4/2015: Get ehnd dic directory
+std::wstring GetEhndDicPath()
 {
-  GetModuleFileName(g_hInst, Path, Size);
-  if (Path[0] == 0) return false;
-  int i = wcslen(Path);
-  while (i--)
-  {
-    if (Path[i] == L'\\')
-    {
-      Path[i] = 0;
-      break;
-    }
-  }
-  return true;
-}
-
-bool GetExecutePath(LPWSTR Path, int Size)
-{
-  GetModuleFileName(GetModuleHandle(NULL), Path, Size);
-  if (Path[0] == 0) return false;
-  int i = wcslen(Path);
-  while (i--)
-  {
-    if (Path[i] == L'\\')
-    {
-      Path[i] = 0;
-      break;
-    }
-  }
-  return true;
+  WCHAR buf[MAX_PATH];
+  GetLoadPath(buf, MAX_PATH);
+  std::wstring ret = buf;
+  ret.push_back('\\');
+  ret.append(pConfig->GetDicPath());
+  return ret;
 }
 
 wstring replace_all(const wstring &str, const wstring &pattern, const wstring &replace)
