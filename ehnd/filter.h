@@ -68,7 +68,7 @@ public:
 	const int GetDicLine(int idx) { return UserDic[idx].line; }
 	const wchar_t *GetDicJPN(int idx) { return UserDic[idx]._jpn; }
 	const wchar_t *GetDicKOR(int idx) { return UserDic[idx]._kor; }
-	const wchar_t *GetDicTYPE(int idx) { return (UserDic[idx]._type == USERDIC_NOUN ? L"명사" : (UserDic[idx]._type == USERDIC_COMM ? L"상용어구" : L"Unknown")); }
+	const wchar_t *GetDicTYPE(int idx) { return (UserDic[idx]._type == USERDIC_NOUN ? L"Noun" : (UserDic[idx]._type == USERDIC_COMM ? L"Phrase" : L"Unknown")); }
 	const wchar_t *GetDicATTR(int idx) { return UserDic[idx]._attr; }
 
 private:

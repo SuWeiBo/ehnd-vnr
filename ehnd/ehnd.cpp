@@ -9,7 +9,7 @@ FARPROC apfnMsv[100];
 
 bool EhndInit(void)
 {
-	// 중복 초기화 방지
+    // Prevent duplicate initialization
 	if (initOnce) return false;
 	else initOnce = true;
 
@@ -255,10 +255,10 @@ void *__stdcall J2K_TranslateMMNT(int data0, LPCSTR szIn)
 	_MultiByteToWideChar(932, 0, szIn, -1, lpJPN, i_len);
 	wsText = lpJPN;
 	msvcrt_free(lpJPN);
-	
+
 	lpKOR = (LPWSTR)J2K_TranslateMMNTW(data0, wsText.c_str());
 
-	// cp949 내보내기 
+	// cp949 내보내기
 	i_len = _WideCharToMultiByte(949, 0, lpKOR, -1, NULL, NULL, NULL, NULL);
 	szOut = (LPSTR)msvcrt_malloc((i_len + 1) * 3);
 	if (szOut == NULL)
