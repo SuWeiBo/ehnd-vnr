@@ -27,9 +27,10 @@ bool EhndInit(void)
     DeleteFile(lpFileName);
   }
 
-  CreateLogWin(g_hInst);
-  ShowLogWin(pConfig->GetConsoleSwitch());
-  LogStartMsg();
+  // jichi 4/3/2015: Disable log window
+  //CreateLogWin(g_hInst);
+  //ShowLogWin(pConfig->GetConsoleSwitch());
+  //LogStartMsg();
 
   GetRealWC2MB();
   GetRealMB2WC();

@@ -10,6 +10,7 @@ struct FILTERSTRUCT
   wstring db;
   int operator<(FILTERSTRUCT fs) { return (layer) < (fs.layer) || ((layer) == (fs.layer) && (g_line < fs.g_line)); }
 };
+
 struct USERDICSTRUCT
 {
   int g_line;
@@ -22,6 +23,7 @@ struct USERDICSTRUCT
 
   int operator<(USERDICSTRUCT uds) {
     char s1[31], s2[31];
+
     int len;
     len = _WideCharToMultiByte(932, 0, _jpn, -1, NULL, NULL, NULL, NULL);
     _WideCharToMultiByte(932, 0, _jpn, -1, s1, len, NULL, NULL);

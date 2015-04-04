@@ -253,7 +253,9 @@ void ShowLogWin(bool bShow)
 
 bool IsShownLogWin(void)
 {
-  return (GetWindowLong(hLogWin, GWL_STYLE) & WS_VISIBLE) ? true : false;
+  // jichi 4/3/2015: Allow disabling login window
+  //return (GetWindowLong(hLogWin, GWL_STYLE) & WS_VISIBLE) ? true : false;
+  return hLogWin && (GetWindowLong(hLogWin, GWL_STYLE) & WS_VISIBLE) ? true : false;
 }
 
 LRESULT CALLBACK LogProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
